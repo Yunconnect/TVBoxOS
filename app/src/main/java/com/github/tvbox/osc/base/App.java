@@ -61,21 +61,21 @@ public class App extends MultiDexApplication {
     }
 
     private void initParams() {
-        // Hawk 初始化
+        // Hawk
         Hawk.init(this).build();
-
-        // 默认关闭调试模式
         Hawk.put(HawkConfig.DEBUG_OPEN, false);
-
-        // 默认播放类型
         if (!Hawk.contains(HawkConfig.PLAY_TYPE)) {
             Hawk.put(HawkConfig.PLAY_TYPE, 1);
         }
+        //自定义默认配置，硬解，安全dns，缩略图
 
-        // 默认开启去广告
-        if (!Hawk.contains(HawkConfig.AD_BLOCK)) {
-            Hawk.put(HawkConfig.AD_BLOCK, true); // 默认开启去广告
-        }
+       if (!Hawk.contains(HawkConfig.IJK_CODEC)) {            Hawk.put(HawkConfig.IJK_CODEC, "硬解码");        } 
+
+       if (!Hawk.contains(HawkConfig.DOH_URL)) {            Hawk.put(HawkConfig.DOH_URL, 2);        }
+
+       if (!Hawk.contains(HawkConfig.SEARCH_VIEW)) {            Hawk.put(HawkConfig.SEARCH_VIEW, 1);        }
+
+       if (!Hawk.contains(HawkConfig.HOME_REC)) {            Hawk.put(HawkConfig.HOME_REC, 1);        }
     }
 
     public static App getInstance() {
@@ -87,6 +87,7 @@ public class App extends MultiDexApplication {
         super.onTerminate();
         JSEngine.getInstance().destroy();
     }
+
 
     private VodInfo vodInfo;
     public void setVodInfo(VodInfo vodinfo){
